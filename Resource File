@@ -1,0 +1,36 @@
+*** Settings ***
+Library    SeleniumLibrary    
+
+*** Variables ***
+${URL}    https://login.optimyapp.com/
+${Broswer}    chrome
+
+*** Keywords ***
+OPEN LAUNCHER
+    Open Browser    ${URL}    ${Broswer}
+    Maximize Browser Window
+    
+CLOSE LAUNCHER
+    Close All Browsers
+    
+
+INPUT USERNAME
+    [Arguments]    ${username}
+    Input Text    dom:document.querySelectorAll('.form-control')[0];    ${username}
+    Sleep    2    
+    
+INPUT PWD
+    [Arguments]    ${password}
+    Input Text    dom:document.querySelectorAll('.form-control')[1];    ${password}
+    Sleep    2    
+            
+LOGIN BUTTON
+    Execute Javascript    document.querySelectorAll('.btn')[0].click();
+    
+ERROR MESSAGE VISIBLE
+    Page Should Contain    The email address or password is incorrect. 
+    
+ERROR MESSAGE VISIBLE IN FIELD
+    Page Should Contain    This field is required.    
+       
+    

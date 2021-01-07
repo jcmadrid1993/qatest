@@ -1,0 +1,21 @@
+*** Settings ***
+Library    SeleniumLibrary    
+Resource    ../Resources/Qa_Test_resource.robot
+Suite Setup    OPEN LAUNCHER
+Suite Teardown    CLOSE LAUNCHER
+Test Template    INCORRECT LOGIN
+
+*** Test Cases ***    username    password
+Correct user      Helloword@Test@gmail.com    Helloworld
+Correct Username Empty Password    johnecismadrid@test.com    ${empty}
+Incorrect Username Empty Passwrod    test@test.com    ${empty}
+
+
+
+*** Keywords ***
+INCORRECT LOGIN
+    [Arguments]    ${username}    ${password}
+    INPUT USERNAME    ${username}
+    INPUT PWD    ${password}
+    LOGIN BUTTON
+    ERROR MESSAGE VISIBLE
